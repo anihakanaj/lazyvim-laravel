@@ -2,6 +2,10 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+vim.keymap.set("i", "jk", "<Esc>", { silent = true })
+vim.keymap.set("i", ";;", "<Esc>A;", { silent = true })
+vim.keymap.set("i", ",,", "<Esc>A,", { silent = true })
+
 local Util = require("lazyvim.util")
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
@@ -14,9 +18,9 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
-map("n", "<leader>gd",
-  function()
-    Util.float_term({ "lazydocker", "-f", Util.get_root() .. "docker-compose.yml" },
-      { cwd = Util.get_root(), esc_esc = false })
-  end,
-  { desc = "LazyDocker (root dir)" })
+map("n", "<leader>gd", function()
+  Util.float_term(
+    { "lazydocker", "-f", Util.get_root() .. "docker-compose.yml" },
+    { cwd = Util.get_root(), esc_esc = false }
+  )
+end, { desc = "LazyDocker (root dir)" })
